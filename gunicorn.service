@@ -6,7 +6,7 @@ After=network.target
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory=/home/ubuntu/HospitalManagement_Django
+WorkingDirectory=/home/ubuntu/project/Django_system
 ExecStart=/home/ubuntu/virtual/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
