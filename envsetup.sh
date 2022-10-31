@@ -10,7 +10,7 @@ fi
 source virtual/bin/activate
 
 
-pip3 install -r requirements.txt
+sudo pip3 install -r requirements.txt
 
 if [ -d "logs" ] 
 then
