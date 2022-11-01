@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -d "env" ] 
 then
@@ -21,3 +21,4 @@ else
 fi
 
 sudo chmod -R 777 logs
+echo "enviroment finished"

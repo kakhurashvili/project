@@ -1,17 +1,26 @@
-#!/bin/sh
+#!/bin/bash
 
 source env/bin/activate
 
+cd /var/lib/jenkins/workspace/project/Django_system
+
 python3 manage.py makemigrations
-
 python3 manage.py migrate
+python3 manage.py collectstatic -- no-input
 
-python3 manage.py collectstatic --noinput
+echo "Migrations done"
 
+cd /var/lib/jenkins/workspace/Django_system
+
+sudo cp -rf gunicorn.socket /etc/systemd/system/
 sudo cp -rf gunicorn.service /etc/systemd/system/
 
-sudo systemctl daemon-reload
+echo "$USER"
+echo "$PWD"
 
+
+
+sudo systemctl daemon-reload
 sudo systemctl start gunicorn
 
 echo "Gunicorn has started."
@@ -20,6 +29,7 @@ sudo systemctl enable gunicorn
 
 echo "Gunicorn has been enabled."
 
-sudo systemctl status gunicorn
-
 sudo systemctl restart gunicorn
+
+
+sudo systemctl status gunicorn
