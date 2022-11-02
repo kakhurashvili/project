@@ -10,7 +10,7 @@ python3 manage.py collectstatic -- no-input
 
 echo "Migrations done"
 
-cd /var/lib/jenkins/workspace/django_project/Django_system
+cd /var/lib/jenkins/workspace/django_project
 
 sudo cp -rf gunicorn.socket /etc/systemd/system/
 sudo cp -rf gunicorn.service /etc/systemd/system/
