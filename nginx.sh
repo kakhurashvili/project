@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo cp -rf medashan.conf /etc/nginx/sites-available/medashan
+sudo cp -rf medashan.conf /etc/nginx/sites-available/medashan.conf
 chmod 777 /var/lib/jenkins/workspace/django_project
 
 sudo ln -s /etc/nginx/sites-available/medashan.conf /etc/nginx/sites-enabled
