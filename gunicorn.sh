@@ -4,9 +4,9 @@ source env/bin/activate
 
 cd /var/lib/jenkins/workspace/project/
 
-python3 manage.py makemigrations
-python3 manage.py migrate
-python3 manage.py collectstatic -- no-input
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic -- no-input
 
 echo "Migrations done"
 
