@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#sudo cp -rf app.conf /etc/nginx/sites-available/app
-#chmod 777 /var/lib/jenkins/workspace/django_project
+sudo cp -rf app.conf /etc/nginx/sites-available/app
+chmod 777 /var/lib/jenkins/workspace/django_project
 
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled
 sudo nginx -t
 
 sudo systemctl start nginx
