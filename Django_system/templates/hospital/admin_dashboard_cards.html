@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+        <title>Dashboard card</title>
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>       
+
+
+</head>
+
+<body>
+    <div class="page-wrapper">
+    <div class="content">
+    <div class="row">
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+    <div class="dash-widget">
+    <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+    <div class="dash-widget-info text-right">
+    <h3>{{doctorcount}}</h3>
+    <span class="widget-title1">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+    <div class="dash-widget">
+    <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+    <div class="dash-widget-info text-right">
+    <h3>{{patientcount}}</h3>
+    <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+    <div class="dash-widget">
+    <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+    <div class="dash-widget-info text-right">
+    <h3>{{pendingdoctorcount}}</h3>
+    <span class="widget-title3">Attend <i class="fa fa-check" aria-hidden="true"></i></span>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+    <div class="dash-widget">
+    <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+    <div class="dash-widget-info text-right">
+    <h3>{{pendingpatientcount}}</h3>
+    <span class="widget-title4">Pending <i class="fa fa-check" aria-hidden="true"></i></span>
+    </div>
+    </div>
+    </div>
+         </div>
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="card">
+                     <div class="card-body">
+                         <div class="chart-title">
+                            <h4>Patient Total</h4>
+                                <span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than Last Month</span>
+                              </div>
+                                    <canvas id="linegraph" </canvas>
+                                   
+                        </div>
+                      </div>
+                  </div>
+            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="card">
+            <div class="card-body">
+            <div class="chart-title">
+            <h4>Patients In</h4>
+            <div class="float-right">
+            <ul class="chat-user-total">
+            <li><i class="fa fa-circle current-users" aria-hidden="true"></i>ICU</li>
+            <li><i class="fa fa-circle old-users" aria-hidden="true"></i> OPD</li>
+            </ul>
+            </div>
+            </div>
+            <canvas  id="bargraph"></canvas>
+                    <script>
+                    $(document).ready(function(){var barChartData={labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[{label:'Dataset 1',backgroundColor:'rgba(0, 158, 251, 0.5)',borderColor:'rgba(0, 158, 251, 1)',borderWidth:1,data:[35,59,80,81,56,55,40]},{label:'Dataset 2',backgroundColor:'rgba(255, 188, 53, 0.5)',borderColor:'rgba(255, 188, 53, 1)',borderWidth:1,data:[28,48,40,19,86,27,90]}]};var ctx=document.getElementById('bargraph').getContext('2d');window.myBar=new Chart(ctx,{type:'bar',data:barChartData,options:{responsive:true,legend:{display:false,}}});var lineChartData={labels:[{% for p in patients %} '{{p.admitDate}}', {% endfor %}],datasets:[{label:"My First dataset",backgroundColor:"rgba(0, 158, 251, 0.5)",data:[{% for p in patients %} '{{p.id}}', {% endfor %}]},{label:"My Second dataset",backgroundColor:"rgba(255, 188, 53, 0.5)",fill:true,data:[{% for p in patients %} '{{p.id}}', {% endfor %}]}]};var linectx=document.getElementById('linegraph').getContext('2d');window.myLine=new Chart(linectx,{type:'line',data:lineChartData,options:{responsive:true,legend:{display:false,},tooltips:{mode:'index',intersect:false,}}});barChart();$(window).resize(function(){barChart();});function barChart(){$('.bar-chart').find('.item-progress').each(function(){var itemProgress=$(this),itemProgressWidth=$(this).parent().width()*($(this).data('percent')/100);itemProgress.css('width',itemProgressWidth);});};});
+                    </script>
+    </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+
+</html>
